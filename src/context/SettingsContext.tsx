@@ -23,7 +23,7 @@ interface SettingsContextType {
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
 
-const SETTINGS_STORAGE_KEY = 'netpen_settings';
+const SETTINGS_STORAGE_KEY = "doodlecode-editor_settings";
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
   // Load settings from localStorage or use defaults

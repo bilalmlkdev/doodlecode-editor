@@ -8,9 +8,9 @@ import { defaultHtml, defaultCss, defaultJs } from './lib/defaults';
 import { FaCss3, FaHtml5, FaJs } from 'react-icons/fa6';
 import { type LayoutMode } from './lib/layout';
 
-const CODE_STORAGE_KEY = 'netpen_code';
-const PROJECT_NAME_KEY = 'netpen_project_name';
-const LAYOUT_STORAGE_KEY = 'netpen_layout';
+const CODE_STORAGE_KEY = "doodlecode-editort_code";
+const PROJECT_NAME_KEY = "doodlecode-editor_project_name";
+const LAYOUT_STORAGE_KEY = "doodlecode-editor_layout";
 
 function App() {
   const [html, setHtml] = useState(() => {
