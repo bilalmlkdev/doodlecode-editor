@@ -1,127 +1,234 @@
 export const defaultHtml = `
-<div class="linktree">
-  <img
-    id="avatar"
-    src=""
-    alt="Bilal Malik"
-    class="avatar"
-    width="100"
-    height="100"
-  />
-  <h1>Bilal Malik</h1>
-  <p>Creative Developer &amp; UI Designer</p>
-  <div class="links">
-    <a href="https://github.com/byllzz" target="_blank" class="link-btn">GitHub</a>
-    <a href="https://x.com/bilalmlkdev" target="_blank" class="link-btn">Twitter / X</a>
-    <a href="https://bilalmlkdev.vercel.app" target="_blank" class="link-btn">Portfolio</a>
-    <a href="https://uiverse.io/byllzz" target="_blank" class="link-btn">UIverse.io</a>
+<section class="ccm-11" aria-label="360 degree wheel navigation demo">
+  <div class="ccm-11__stage">
+    <div class="ccm-11__pointer" aria-hidden="true"></div>
+    <nav class="ccm-11__machine" style="--n:8" aria-label="Sections">
+      <ul class="ccm-11__wheel">
+        <li style="--i:0"><button type="button" class="ccm-11__stop is-active" aria-pressed="true">Home</button></li>
+        <li style="--i:1"><button type="button" class="ccm-11__stop" aria-pressed="false">Series</button></li>
+        <li style="--i:2"><button type="button" class="ccm-11__stop" aria-pressed="false">Films</button></li>
+        <li style="--i:3"><button type="button" class="ccm-11__stop" aria-pressed="false">Live</button></li>
+        <li style="--i:4"><button type="button" class="ccm-11__stop" aria-pressed="false">Sports</button></li>
+        <li style="--i:5"><button type="button" class="ccm-11__stop" aria-pressed="false">Kids</button></li>
+        <li style="--i:6"><button type="button" class="ccm-11__stop" aria-pressed="false">Music</button></li>
+        <li style="--i:7"><button type="button" class="ccm-11__stop" aria-pressed="false">My list</button></li>
+      </ul>
+      <div class="ccm-11__face"><em>Now browsing</em><strong class="ccm-11__current">Home</strong>
+        <div class="ccm-11__steer"><button type="button" class="ccm-11__prev" aria-label="Previous section">←</button><button type="button" class="ccm-11__next" aria-label="Next section">→</button></div>
+      </div>
+      <p class="ccm-11__live" aria-live="polite"></p>
+    </nav>
   </div>
-</div>
+</section>
 `;
 
 export const defaultCss = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
+.ccm-11,
+.ccm-11 *,
+.ccm-11 *::before,
+.ccm-11 *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-body {
+.ccm-11 {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  font-family: 'Inter', -apple-system, sans-serif;
-  background: #0d0d0d;
-  color: #f0f0f0;
-  margin: 0;
-  padding: 20px;
+  background: radial-gradient(circle at 50% 30%,oklch(0.28 0.02 20),oklch(0.18 0.015 15) 70%);
+  --brand: oklch(0.72 0.19 25);
+  --ink: oklch(0.93 0.005 25);
+  font-family: 'Segoe UI',system-ui,sans-serif;
+  color: var(--ink);
 }
 
-.linktree {
-  text-align: center;
-  max-width: 320px;
+.ccm-11__stage {
   width: 100%;
-  padding: 2rem 1.5rem;
-  background: #151515;
+  height: 100vh;
+  position: relative;
+  display: grid;
+  place-items: center;
   border-radius: 20px;
-  border: 1px solid #2a2a2a;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: radial-gradient(circle at 50% 30%,oklch(0.28 0.02 20),oklch(0.18 0.015 15) 70%);
+  overflow: hidden;
 }
 
-.linktree:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 30px 50px rgba(0,0,0,0.8);
+.ccm-11__pointer {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 196px);
+  translate: -50% 0;
+  width: 0;
+  height: 0;
+  border: 9px solid transparent;
+  border-top: 13px solid var(--brand);
+  filter: drop-shadow(0 2px 6px oklch(0.72 0.19 25 / .6));
+  z-index: 3;
 }
 
-.avatar {
-  width: 100px;
-  height: 100px;
+.ccm-11__machine {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  display: grid;
+  place-items: center;
+}
+
+.ccm-11__wheel {
+  position: absolute;
+  inset: 0;
+  list-style: none;
   border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 1rem;
-  border: 4px solid #2a2a2a;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-  background: #1a1a1a; /* fallback while loading */
+  border: 1px solid oklch(0.5 0.05 25 / .4);
+  rotate: var(--rot,0deg);
+  transition: rotate .7s cubic-bezier(.3,1,.35,1);
 }
 
-h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0 0 0.25rem;
-  color: #ffffff;
-  letter-spacing: -0.5px;
+.ccm-11__wheel li {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  --a: calc((360deg / var(--n)) * var(--i) - 90deg);
+  translate: calc(cos(var(--a)) * 170px) calc(sin(var(--a)) * 170px);
 }
 
-p {
-  color: #a1a1aa;
-  font-size: 0.9rem;
-  margin: 0 0 1.5rem;
-  font-weight: 400;
+.ccm-11__stop {
+  pointer-events: auto;
+  border: 1px solid oklch(0.5 0.05 25 / .5);
+  border-radius: 999px;
+  padding: 9px 16px;
+  background: oklch(0.26 0.02 20 / .85);
+  color: oklch(0.8 0.02 25);
+  font: 600 13px/1 'Segoe UI',system-ui,sans-serif;
+  letter-spacing: .02em;
+  cursor: pointer;
+  white-space: nowrap;
+  rotate: calc(var(--rot,0deg) * -1);
+  transition: rotate .7s cubic-bezier(.3,1,.35,1),background .25s,color .25s,border-color .25s,scale .25s;
 }
 
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.ccm-11__stop:hover {
+  border-color: var(--brand);
+  color: #fff;
 }
 
-.link-btn {
-  display: block;
-  padding: 0.9rem 1.5rem;
-  background: #1a1a1a;
-  color: #e0e0e0;
-  text-decoration: none;
-  border-radius: 12px;
-  border: 1px solid #2a2a2a;
-  font-weight: 500;
-  font-size: 0.95rem;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+.ccm-11__stop:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+
+.ccm-11__stop.is-active {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: oklch(0.2 0.03 25);
+  scale: 1.12;
+  box-shadow: 0 0 24px -4px oklch(0.72 0.19 25 / .7);
+}
+
+.ccm-11__face {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  place-content: center;
   text-align: center;
+  background: radial-gradient(circle at 38% 30%,oklch(0.3 0.02 20),oklch(0.21 0.015 15));
+  border: 1px solid oklch(0.5 0.05 25 / .4);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / .1),0 20px 50px -20px oklch(0 0 0 / .8);
 }
 
-.link-btn:hover {
-  background: #2a2a2a;
-  border-color: #6366f1;
-  color: #ffffff;
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+.ccm-11__face em {
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: oklch(0.62 0.04 25);
+}
+
+.ccm-11__current {
+  font-size: 25px;
+  letter-spacing: -.01em;
+}
+
+.ccm-11__steer {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ccm-11__steer button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid oklch(0.5 0.05 25 / .5);
+  background: oklch(0.28 0.02 20);
+  color: var(--ink);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background .2s,border-color .2s;
+}
+
+.ccm-11__steer button:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: oklch(0.2 0.03 25);
+}
+
+.ccm-11__steer button:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.ccm-11__live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ccm-11 * {
+    transition-duration: .01s !important;
+  }
 }
 `;
 
 export const defaultJs = `
-// Fetch your GitHub avatar and display it ✨
-const avatar = document.getElementById('avatar');
-
-async function loadAvatar() {
-  try {
-    const res = await fetch('https://api.github.com/users/byllzz');
-    if (!res.ok) throw new Error('Failed to fetch');
-    const data = await res.json();
-    avatar.src = data.avatar_url;
-    avatar.alt = data.name || 'Bilal Malik';
-  } catch {
-    // Fallback: a beautiful gradient placeholder
-    avatar.style.background = 'linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899)';
-  }
-}
-
-loadAvatar();
+(() => {
+  const machine = document.querySelector('.ccm-11__machine');
+  const wheel = machine.querySelector('.ccm-11__wheel');
+  const stops = [...machine.querySelectorAll('.ccm-11__stop')];
+  const current = machine.querySelector('.ccm-11__current');
+  const live = machine.querySelector('.ccm-11__live');
+  const n = stops.length, step = 360 / n;
+  let rot = 0, active = 0;
+  const setStopRot = () => stops.forEach((s) => s.style.rotate = (-rot) + 'deg');
+  const goTo = (idx) => {
+    idx = ((idx % n) + n) % n;
+    const target = -idx * step;
+    let delta = target - (((rot % 360) + 360) % 360 === 0 ? 0 : rot % 360);
+    delta = ((delta % 360) + 540) % 360 - 180;
+    rot += delta;
+    wheel.style.setProperty('--rot', rot + 'deg');
+    setStopRot();
+    stops.forEach((s, k) => { s.classList.toggle('is-active', k === idx); s.setAttribute('aria-pressed', String(k === idx)); });
+    active = idx;
+    current.textContent = stops[idx].textContent;
+    live.textContent = stops[idx].textContent + ' selected';
+  };
+  stops.forEach((s, k) => s.addEventListener('click', () => goTo(k)));
+  machine.querySelector('.ccm-11__prev').addEventListener('click', () => goTo(active - 1));
+  machine.querySelector('.ccm-11__next').addEventListener('click', () => goTo(active + 1));
+})();
 `;
