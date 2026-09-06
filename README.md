@@ -1,7 +1,7 @@
 <div align="center">
 
   <a href="https://doodlecode-editor.vercel.app/">
-    <img src="https://raw.githubusercontent.com/bilalmlkdev/doodlecode-editor/main/public/logo.svg" alt="doodlecode-editor logo" width="100%" height="120">
+    <img src="https://raw.githubusercontent.com/bilalmlkdev/doodlecode-editor/main/src/assets/favicon.svg" alt="doodlecode-editor logo" height="100">
   </a>
 
 # Doodlecode Editor
